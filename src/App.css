@@ -1,38 +1,39 @@
-.App {
+body {
+  font-family: "Red Hat Display", sans-serif;
+  font-family: "Roboto", sans-serif;
+  background: #e4e4e4;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding-top: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.card-box {
+  padding: 0 2rem;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  cursor: pointer;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+  & .card {
+    background-color: #f7f7f7;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%233C50E0FF' stroke-width='8' stroke-dasharray='12%2c20' stroke-dashoffset='39' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 4px;
+    padding: 1rem;
+    font-size: 20px;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+    & p {
+      text-align: center;
+      padding-top: 0.8rem;
+      padding-bottom: 0.8rem;
+      font-weight: bold;
+    }
+    & span {
+      color: #3c50e0;
+    }
   }
 }
