@@ -7,13 +7,18 @@ function App() {
     // Do something with the files
     console.log(acceptedFiles[0]);
   }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    },
+  });
   return (
     <>
       <main>
         <h1>react dropzone</h1>
         <input type="file" name="" id="" {...getInputProps()} />
-
         <div className={`card-box ${isDragActive && "active"}`} {...getRootProps()}>
           <div className="card">
             <p>
