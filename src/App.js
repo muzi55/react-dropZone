@@ -1,12 +1,18 @@
 import { useDropzone } from "react-dropzone";
 import "./App.css";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import img from "./assets/img/cloud-arrow-up.svg";
+
 function App() {
+  const [imgSrc, setImgSrc] = useState();
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the files
-    console.log(acceptedFiles[0]);
+    const file = acceptedFiles[0];
+
+    const blobURL = URL.createObjectURL(file);
+    setImgSrc(blobURL);
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -14,6 +20,7 @@ function App() {
       "image/jpg": [".jpg"],
     },
   });
+
   return (
     <>
       <main>
@@ -25,6 +32,9 @@ function App() {
               <span>Click to upload</span> or drag and drop
             </p>
             <p>PNG, JPG (max, 800 X 500px)</p>
+          </div>
+          <div className="imgPreview mt-20">
+            <img src={imgSrc} alt="구름모양 업로드 아이콘" />
           </div>
         </div>
       </main>

@@ -71,6 +71,17 @@ h1 {
   }
 }
 
+.imgPreview {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  & > img {
+    width: 100%;
+  }
+}
+.mt-20 {
+  margin-top: 20px;
+}
 @keyframes uploadAnime {
   0% {
     transform: translateY(0);
