@@ -40,4 +40,87 @@ yarn install
 <br />
 <br />
 
-<!-- 아직 못한것은 input accept 속성과, 크기제한 이다. -->
+## accept
+
+react-dropzone에서 accept 속성을 지정해줄 수 있다.
+
+![Alt text](src/assets/img/code1.png)
+
+기존에 사용하던 input태그의 accept 속성처럼 사용하면 된다.<br />
+이렇게 설정해놓으면 이미지 중에서 **png,jpg** 두가지의 파일확장자만 받게끔 되었다.
+
+## 이미지 미리보기
+
+![Alt text](src/assets/img4.gif)
+
+이미지 미리보기 방식은 blob 을 사용했다.
+<br />
+<br />
+
+```jsx
+const onDrop = useCallback((acceptedFiles) => {
+  const file = acceptedFiles[0];
+  const blobURL = URL.createObjectURL(file);
+  setImgSrc(blobURL);
+}, []);
+```
+
+ondrop 기존에 있던 ondrop 함수에서 받아오는 파라미터의 값을 blob url로 만들어 그값을 state에 담아서 사용하는식으로 미리보기를 구현했다.
+<br />
+<br />
+
+## 최종 코드
+
+```jsx
+import { useDropzone } from "react-dropzone";
+import "./App.css";
+import { useCallback, useState } from "react";
+import img from "./assets/img/cloud-arrow-up.svg";
+
+function App() {
+  const [imgSrc, setImgSrc] = useState();
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+
+    const blobURL = URL.createObjectURL(file);
+    setImgSrc(blobURL);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    },
+  });
+
+  return (
+    <>
+      <main>
+        <h1>react dropzone</h1>
+        <input type="file" name="" id="" {...getInputProps()} />
+        <div className={`card-box ${isDragActive && "active"}`} {...getRootProps()}>
+          <div className="card">
+            <p>
+              <span>Click to upload</span> or drag and drop
+            </p>
+            <p>PNG, JPG (max, 800 X 500px)</p>
+          </div>
+        </div>
+        <div className="imgPreview">{imgSrc ? <img src={imgSrc} alt="구름모양 업로드 아이콘" /> : <div>이미지를 업로드 해주세요</div>}</div>
+      </main>
+
+      {isDragActive && (
+        <div className="drag-active">
+          <img src={img} alt="구름모양 업로드 아이콘" />
+          <p>업로드할 파일을 드롭하세요.</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default App;
+```
+
+이후 추가한다면 다중 선택, 이미지 삭제하기 종도 있을거같다.

@@ -33,10 +33,8 @@ function App() {
             </p>
             <p>PNG, JPG (max, 800 X 500px)</p>
           </div>
-          <div className="imgPreview mt-20">
-            <img src={imgSrc} alt="구름모양 업로드 아이콘" />
-          </div>
         </div>
+        <div className="imgPreview">{imgSrc ? <img src={imgSrc} alt="구름모양 업로드 아이콘" /> : <div>이미지를 업로드 해주세요</div>}</div>
       </main>
 
       {isDragActive && (
